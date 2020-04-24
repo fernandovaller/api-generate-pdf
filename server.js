@@ -41,7 +41,7 @@ app.post('/pdf', async function (req, res) {
 
   let pdf = await getPDF(url);
 
-  let pdf_link = `http://localhost:3000/download/${pdf}`;
+  let pdf_link = `${process.env.APP_URL}/download/${pdf}`;
 
   let dados = {
     url: url,
@@ -59,7 +59,7 @@ app.listen(process.env.PORT || config.get('server.port'), function(){
 const getPDF = async (url) => {
   let name_rand = uuidv4();
   let file_name = `pdf-${name_rand}.pdf`;
-  let file_path = process.env.APP_URL || config.get('server.path');
+  let file_path = process.env.APP_URL_UPLOADS || config.get('server.path');
 
   const browser = await puppeteer.launch({
     //headless: false
