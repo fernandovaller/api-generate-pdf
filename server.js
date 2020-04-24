@@ -52,14 +52,14 @@ app.post('/pdf', async function (req, res) {
 
 });
 
-app.listen(config.get('server.port'), function(){
-  console.log(`Servidor rodando em ${config.get('server.port')}`);
+app.listen(process.env.PORT || config.get('server.port'), function(){
+  console.log(`Servidor rodando em ${process.env.PORT}`);
 });
 
 const getPDF = async (url) => {
   let name_rand = uuidv4();
   let file_name = `pdf-${name_rand}.pdf`;
-  let file_path = config.get('server.path');
+  let file_path = process.env.APP_URL || config.get('server.path');
 
   const browser = await puppeteer.launch({
     //headless: false
